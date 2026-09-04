@@ -1,0 +1,36 @@
+case_name,team_size,budget,expected_users,number_of_roles,number_of_modules,real_time,payment,external_integrations,data_complexity,availability,domain,architecture
+"Early-stage food delivery MVP (2 engineers, single city launch)",2,low,low,3,4,True,True,2,medium,medium,food_delivery,Monolith
+Solo-founder booking tool for local businesses,1,low,low,2,3,False,True,1,low,low,booking_platform,Monolith
+Small team internal admin dashboard,3,low,low,2,4,False,False,1,low,low,productivity_tool,Monolith
+University course management portal,4,low,low,3,5,False,False,0,low,medium,edtech,Monolith
+Campus marketplace app for students,3,low,low,3,4,False,True,1,low,low,marketplace,Monolith
+Blog/CMS platform for a small publisher,2,low,low,2,3,False,False,0,low,low,content_management,Monolith
+Freelancer invoicing tool,2,low,low,2,3,False,True,1,low,low,fintech,Monolith
+Fitness tracking app for a gym chain,3,medium,medium,3,5,False,False,1,medium,medium,healthtech,Monolith
+National e-commerce marketplace at scale,15,high,high,5,12,False,True,5,high,high,e_commerce,Microservices
+Ride-hailing platform with live tracking,20,high,high,6,14,True,True,6,high,high,logistics,Microservices
+Social media platform with feeds and messaging,25,high,high,6,15,True,False,4,high,high,social_media,Microservices
+Video streaming platform with recommendations,18,high,high,5,13,True,False,5,high,high,media_streaming,Microservices
+Multi-vendor food delivery platform at national scale,12,high,high,5,10,True,True,6,high,high,food_delivery,Microservices
+Digital banking platform with fraud detection,16,high,high,6,12,True,True,5,high,high,fintech,Microservices
+Real-time multiplayer gaming backend,14,high,high,4,9,True,True,4,high,high,gaming,Microservices
+Large-scale logistics and fleet management system,17,high,high,5,11,True,False,6,high,high,logistics,Microservices
+Healthcare records platform for hospital network,13,high,high,5,10,False,False,4,high,high,healthtech,Microservices
+IoT sensor fleet management platform,10,medium,high,4,9,True,False,5,high,high,iot_platform,Microservices
+Event-driven analytics dashboard for enterprise clients,11,medium,high,4,8,False,False,3,high,high,analytics_dashboard,Microservices
+Hackathon weekend project — image resize API,2,low,low,1,2,False,False,1,low,low,productivity_tool,Serverless
+Contact form + notification microservice for a landing page,1,low,low,1,1,False,False,1,low,low,productivity_tool,Serverless
+Scheduled data-sync job between two SaaS tools,1,low,low,1,2,False,False,2,low,medium,productivity_tool,Serverless
+Webhook processor for e-commerce order events,2,low,medium,2,2,False,True,2,low,medium,e_commerce,Serverless
+Chatbot backend for customer support (bursty traffic),2,low,medium,2,3,True,False,2,medium,medium,productivity_tool,Serverless
+Image/video thumbnail generation pipeline,2,low,medium,1,2,False,False,1,medium,medium,media_streaming,Serverless
+Serverless survey and forms tool for small businesses,2,low,low,2,3,False,False,1,low,low,productivity_tool,Serverless
+IoT telemetry ingestion for a small device fleet,3,low,medium,2,3,True,False,2,medium,medium,iot_platform,Serverless
+Marketing analytics event collector,2,low,medium,2,3,False,False,2,medium,medium,analytics_dashboard,Serverless
+On-demand PDF/report generation service,1,low,low,1,2,False,False,1,low,low,productivity_tool,Serverless
+Seasonal ticket-booking spike handler for events,3,medium,high,2,4,True,True,3,medium,high,booking_platform,Serverless
+Regional grocery delivery app (mid-size city),6,medium,medium,4,7,True,True,3,medium,medium,food_delivery,Microservices
+"Two-sided freelance marketplace, growing steadily",7,medium,medium,4,8,False,True,3,medium,medium,marketplace,Microservices
+Online learning platform with live classes,8,medium,medium,4,7,True,False,3,medium,medium,edtech,Microservices
+"Peer-to-peer payments app, regional launch",6,medium,medium,3,6,False,True,3,medium,high,fintech,Microservices
+Subscription box e-commerce site,5,medium,medium,3,6,False,True,2,medium,medium,e_commerce,Monolith

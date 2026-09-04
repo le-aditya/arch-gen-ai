@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+node_modules/
+frontend/dist/
+
+.env
+*.env
+
+arch_gen.db
+reports/*.pdf
+
+# Trained model artifacts ARE committed (ml/models/*.joblib) — the deployed
+# backend loads them directly rather than retraining on every deploy.

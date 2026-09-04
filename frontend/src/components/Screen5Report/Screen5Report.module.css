@@ -1,0 +1,129 @@
+.container {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  padding-bottom: var(--sp-4);
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.eyebrow {
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--graphite);
+}
+
+.archName {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.summaryText {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--ink);
+  max-width: 52ch;
+}
+
+.summaryText strong {
+  font-weight: 600;
+}
+
+.meta {
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  color: var(--graphite);
+  display: flex;
+  gap: var(--sp-6);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-4);
+}
+
+/* Download — the one deliberate amber accent on this screen */
+.downloadButton {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: var(--sp-4) var(--sp-8);
+  background: var(--amber);
+  color: var(--ink);
+  border: none;
+  border-radius: var(--radius);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.downloadButton:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.downloadButton:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+.downloadButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.downloadError {
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  color: #922;
+}
+
+/* Restart — quiet, secondary */
+.restartButton {
+  font-family: var(--font-data);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: var(--sp-3) var(--sp-6);
+  background: transparent;
+  color: var(--graphite);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.restartButton:hover {
+  border-color: var(--cyanotype);
+  color: var(--cyanotype);
+}
+
+.restartButton:focus-visible {
+  outline: 2px solid var(--cyanotype);
+  outline-offset: 2px;
+}

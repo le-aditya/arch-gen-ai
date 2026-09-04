@@ -1,0 +1,189 @@
+.container {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mark {
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--cyanotype);
+  margin-bottom: var(--sp-8);
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: var(--sp-4);
+}
+
+.subhead {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--graphite);
+  max-width: 46ch;
+  margin-bottom: var(--sp-10);
+}
+
+/* Form — reads as a specification sheet, not a settings panel */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--border-strong);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.fieldHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.fieldLabel {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.charCount {
+  font-family: var(--font-data);
+  font-size: 0.68rem;
+  color: var(--graphite);
+}
+
+.field textarea {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  padding: var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--ink);
+  resize: vertical;
+  min-height: 140px;
+  transition: border-color 0.15s ease;
+}
+
+.field textarea::placeholder {
+  color: var(--graphite);
+  opacity: 0.55;
+}
+
+.field textarea:focus {
+  outline: none;
+  border-color: var(--cyanotype);
+}
+
+.fieldHint {
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  color: #922;
+}
+
+.formError {
+  font-family: var(--font-data);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: #922;
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid #922;
+  border-radius: var(--radius);
+  background: rgba(153, 34, 34, 0.06);
+}
+
+/* Row layout for select fields */
+.row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-5);
+}
+
+.field select {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: var(--sp-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235C6670' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+  transition: border-color 0.15s ease;
+}
+
+.field select:focus {
+  outline: none;
+  border-color: var(--cyanotype);
+}
+
+/* Analyze button — the one deliberate accent on this screen */
+.analyzeButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: var(--sp-4) var(--sp-8);
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  border-radius: var(--radius);
+  transition: background 0.15s ease, transform 0.15s ease;
+  align-self: flex-start;
+  margin-top: var(--sp-2);
+}
+
+.analyzeButton:hover:not(:disabled) {
+  background: var(--cyanotype);
+}
+
+.analyzeButton:hover:not(:disabled) span {
+  transform: translateX(2px);
+}
+
+.analyzeButton span {
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+
+.analyzeButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.analyzeButton:focus-visible {
+  outline: 2px solid var(--cyanotype);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .headline {
+    font-size: 1.9rem;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+  }
+}

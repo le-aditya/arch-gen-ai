@@ -1,0 +1,96 @@
+/* ============================================================
+   ARCH GEN AI — Blueprint Design System
+   ============================================================ */
+
+:root {
+  /* Blueprint Palette */
+  --ink: #0E2A3F;
+  --paper: #FAFAF7;
+  --cyanotype: #3E7CB1;
+  --amber: #D98E36;
+  --graphite: #5C6670;
+
+  /* Derived */
+  --grid-line: rgba(62, 124, 177, 0.08);
+  --border: rgba(62, 124, 177, 0.2);
+  --border-strong: rgba(62, 124, 177, 0.4);
+  --surface: #FFFFFF;
+  --surface-dim: rgba(14, 42, 63, 0.03);
+
+  /* Typography — two typefaces only: a geometric sans for everything that
+     reads as language, monospace strictly for technical/data content. */
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-data: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* Spacing scale (4px base) */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+
+  /* Square-ish corners — a drafting tool, not a SaaS card kit */
+  --radius: 2px;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background-color: var(--paper);
+  min-height: 100vh;
+
+  /* Blueprint grid pattern */
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+input, textarea, select {
+  font-family: inherit;
+}
+
+::selection {
+  background: var(--cyanotype);
+  color: var(--paper);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

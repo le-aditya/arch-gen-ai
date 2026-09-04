@@ -1,0 +1,19 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--sp-10) var(--sp-6);
+}
+
+@media (max-width: 640px) {
+  .main {
+    padding: var(--sp-6) var(--sp-4);
+  }
+}

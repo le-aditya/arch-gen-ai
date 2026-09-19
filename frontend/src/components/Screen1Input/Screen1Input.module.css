@@ -94,18 +94,18 @@
   font-family: var(--font-data);
   font-size: 0.7rem;
   letter-spacing: 0.02em;
-  color: #922;
+  color: var(--alert);
 }
 
 .formError {
   font-family: var(--font-data);
   font-size: 0.75rem;
   letter-spacing: 0.02em;
-  color: #922;
+  color: var(--alert);
   padding: var(--sp-3) var(--sp-4);
-  border: 1px solid #922;
+  border: 1px solid var(--alert);
   border-radius: var(--radius);
-  background: rgba(153, 34, 34, 0.06);
+  background: rgba(228, 115, 110, 0.08);
 }
 
 /* Row layout for select fields */
@@ -113,6 +113,11 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--sp-5);
+}
+
+.field select option {
+  background: var(--surface);
+  color: var(--ink);
 }
 
 .field select {
@@ -125,7 +130,7 @@
   color: var(--ink);
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235C6670' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237C8D9B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 10px center;
   padding-right: 28px;

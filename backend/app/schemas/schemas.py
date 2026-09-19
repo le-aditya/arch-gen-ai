@@ -52,16 +52,27 @@ class TopFactor(BaseModel):
     importance: float
 
 
+class ClassProbability(BaseModel):
+    """One architecture style and the probability the classifier assigned it."""
+
+    architecture: str
+    probability: float
+
+
 class Prediction(BaseModel):
     architecture: Literal["Monolith", "Microservices", "Serverless"]
     confidence: float
     top_factors: list[TopFactor]
+    # Every class the model scored, highest first -- the winning class is the
+    # first entry, so `confidence` is `alternatives[0].probability`.
+    alternatives: list[ClassProbability] = []
 
 
 class PredictionResponse(BaseModel):
     architecture: str
     confidence: float
     top_factors: list[TopFactor]
+    alternatives: list[ClassProbability] = []
 
 
 class GenerationRequest(BaseModel):

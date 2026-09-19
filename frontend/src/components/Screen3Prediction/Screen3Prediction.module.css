@@ -43,27 +43,78 @@
   color: var(--ink);
 }
 
-.confidence {
+/* Class distribution — every class the model scored, not just the winner.
+   The losing classes are what make the winning number mean anything. */
+.distribution {
   display: flex;
-  align-items: baseline;
-  gap: var(--sp-2);
-  padding-bottom: var(--sp-5);
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding-bottom: var(--sp-6);
   border-bottom: 1px solid var(--border-strong);
 }
 
-.confidenceValue {
+.groupLabel {
   font-family: var(--font-data);
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--amber);
-}
-
-.confidenceLabel {
-  font-family: var(--font-data);
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--graphite);
+  margin-bottom: var(--sp-1);
+}
+
+.classRow {
+  display: grid;
+  grid-template-columns: 128px 1fr 52px;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.className {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--graphite);
+}
+
+.classRow[data-winner="true"] .className {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.classTrack {
+  height: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.classFill {
+  height: 100%;
+  background: var(--border-strong);
+  transform-origin: left center;
+  animation: grow 0.5s cubic-bezier(0.2, 0.8, 0.3, 1) backwards;
+}
+
+.classRow[data-winner="true"] .classFill {
+  background: var(--amber);
+}
+
+.classValue {
+  font-family: var(--font-data);
+  font-size: 0.75rem;
+  color: var(--graphite);
+  text-align: right;
+}
+
+.classRow[data-winner="true"] .classValue {
+  color: var(--amber);
+  font-weight: 600;
+}
+
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
 }
 
 /* Factor bars */
@@ -71,15 +122,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--sp-4);
-}
-
-.factorsTitle {
-  font-family: var(--font-data);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--graphite);
 }
 
 .factor {
@@ -140,4 +182,15 @@
 .navButton:focus-visible {
   outline: 2px solid var(--cyanotype);
   outline-offset: 2px;
+}
+
+@media (max-width: 560px) {
+  .classRow {
+    grid-template-columns: 96px 1fr 46px;
+    gap: var(--sp-3);
+  }
+
+  .className {
+    font-size: 0.8rem;
+  }
 }

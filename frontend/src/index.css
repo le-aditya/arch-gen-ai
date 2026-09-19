@@ -3,19 +3,33 @@
    ============================================================ */
 
 :root {
-  /* Blueprint Palette */
-  --ink: #0E2A3F;
-  --paper: #FAFAF7;
-  --cyanotype: #3E7CB1;
-  --amber: #D98E36;
-  --graphite: #5C6670;
+  /* Blueprint palette, inverted to the original cyanotype process: pale lines
+     drawn on a Prussian-blue ground, not dark ink on white paper.
+     --ink is still the drawing colour and --paper still the ground; only
+     which of the two is light has flipped, so every consumer stays correct. */
+  --ink: #DFEAF2;
+  --paper: #0A1822;
+  --cyanotype: #5FA3DA;
+  --amber: #E9A44B;
+  --graphite: #7C8D9B;
 
   /* Derived */
-  --grid-line: rgba(62, 124, 177, 0.08);
-  --border: rgba(62, 124, 177, 0.2);
-  --border-strong: rgba(62, 124, 177, 0.4);
-  --surface: #FFFFFF;
-  --surface-dim: rgba(14, 42, 63, 0.03);
+  --grid-line: rgba(95, 163, 218, 0.07);
+  --border: rgba(95, 163, 218, 0.18);
+  --border-strong: rgba(95, 163, 218, 0.38);
+  --surface: #10242F;
+  --surface-dim: rgba(95, 163, 218, 0.04);
+
+  /* Sits under the pipeline rail — deeper than the page so the nav reads as
+     a fixed edge rather than a floating band. */
+  --ground-deep: #06121A;
+
+  /* Text placed on top of a filled --amber or --ink block. */
+  --on-accent: #0A1822;
+
+  /* Error state — the blueprint palette has no red, so this is the one
+     colour outside it, kept legible against the dark ground. */
+  --alert: #E4736E;
 
   /* Typography — two typefaces only: a geometric sans for everything that
      reads as language, monospace strictly for technical/data content. */
@@ -61,11 +75,14 @@ body {
   background-color: var(--paper);
   min-height: 100vh;
 
-  /* Blueprint grid pattern */
+  /* Blueprint grid, with a soft pool of light behind the content column so the
+     ground reads as a lit drafting surface rather than a flat black field. */
   background-image:
+    radial-gradient(ellipse 900px 600px at 50% 0%, rgba(95, 163, 218, 0.07), transparent 70%),
     linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-size: 100% 100%, 24px 24px, 24px 24px;
+  background-attachment: fixed, scroll, scroll;
 }
 
 h1, h2, h3, h4, h5, h6 {

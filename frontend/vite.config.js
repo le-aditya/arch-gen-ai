@@ -7,7 +7,10 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:8000',
+        // 127.0.0.1, not localhost: on Windows `localhost` resolves to ::1
+        // first, and uvicorn binds IPv4 only, so every proxied request stalls
+        // ~10s failing over to IPv4 before it connects.
+        target: 'http://127.0.0.1:8000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }

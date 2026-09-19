@@ -76,7 +76,7 @@
   font-weight: 600;
   padding: var(--sp-4) var(--sp-8);
   background: var(--amber);
-  color: var(--ink);
+  color: var(--on-accent);
   border: none;
   border-radius: var(--radius);
   transition: background 0.15s ease, color 0.15s ease;
@@ -100,7 +100,7 @@
 .downloadError {
   font-family: var(--font-data);
   font-size: 0.7rem;
-  color: #922;
+  color: var(--alert);
 }
 
 /* Restart — quiet, secondary */

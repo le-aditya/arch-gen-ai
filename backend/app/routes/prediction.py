@@ -17,4 +17,5 @@ def predict_architecture(payload: PredictionRequest):
         architecture=prediction.architecture,
         confidence=prediction.confidence,
         top_factors=prediction.top_factors,
+        alternatives=prediction.alternatives,
     )

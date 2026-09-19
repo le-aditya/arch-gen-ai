@@ -5,7 +5,7 @@ from pathlib import Path
 import joblib
 import pandas as pd
 
-from app.schemas.schemas import FeatureVector, Prediction, TopFactor
+from app.schemas.schemas import ClassProbability, FeatureVector, Prediction, TopFactor
 
 ML_ROOT = Path(__file__).parent.parent.parent.parent / "ml"
 MODELS_DIR = ML_ROOT / "models"
@@ -77,7 +77,21 @@ class MLService:
                 for name, v in ranked
             ]
 
-        return Prediction(architecture=architecture, confidence=confidence, top_factors=top_factors)
+        alternatives = sorted(
+            (
+                ClassProbability(architecture=str(cls), probability=float(p))
+                for cls, p in zip(classes, proba)
+            ),
+            key=lambda c: c.probability,
+            reverse=True,
+        )
+
+        return Prediction(
+            architecture=architecture,
+            confidence=confidence,
+            top_factors=top_factors,
+            alternatives=alternatives,
+        )
 
 
 _ml_service_instance: MLService | None = None

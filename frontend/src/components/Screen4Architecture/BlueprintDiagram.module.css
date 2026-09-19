@@ -1,0 +1,154 @@
+.frame {
+  margin: 0;
+  padding: var(--sp-5);
+  border: 1px solid var(--border-strong);
+  background-color: rgba(6, 18, 26, 0.55);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 16px 16px;
+  overflow-x: auto;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  min-width: 460px;
+  height: auto;
+}
+
+.caption {
+  font-family: var(--font-data);
+  font-size: 0.72rem;
+  color: var(--graphite);
+  margin-top: var(--sp-4);
+}
+
+/* ---- Node shapes ------------------------------------------------------- */
+
+.shapeService,
+.shapeClient,
+.shapeQueue,
+.shapeGateway,
+.shapeDb,
+.shapeDbCap {
+  fill: none;
+  stroke-width: 1.25;
+  vector-effect: non-scaling-stroke;
+}
+
+.shapeService {
+  stroke: var(--border-strong);
+  fill: var(--surface);
+}
+
+.shapeClient {
+  stroke: var(--ink);
+  fill: var(--surface);
+}
+
+.shapeGateway {
+  stroke: var(--cyanotype);
+  fill: var(--surface);
+}
+
+.shapeQueue {
+  stroke: var(--cyanotype);
+  fill: var(--surface);
+  stroke-dasharray: 4 3;
+}
+
+.shapeDb {
+  stroke: var(--amber);
+  fill: var(--surface);
+}
+
+.shapeDbCap {
+  stroke: var(--amber);
+}
+
+.nodeLabel {
+  font-family: var(--font-data);
+  font-size: 11px;
+  font-weight: 500;
+  fill: var(--ink);
+  text-anchor: middle;
+}
+
+/* ---- Connectors -------------------------------------------------------- */
+
+.edge {
+  fill: none;
+  stroke: var(--border-strong);
+  stroke-width: 1.25;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 0.55s ease-out forwards;
+}
+
+.arrow {
+  fill: var(--border-strong);
+  opacity: 0;
+  animation: appear 0.2s ease-out forwards;
+}
+
+.junction {
+  fill: var(--cyanotype);
+  opacity: 0;
+  animation: appear 0.2s ease-out forwards;
+}
+
+.node {
+  opacity: 0;
+  animation: appear 0.3s ease-out forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes appear {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---- Title block ------------------------------------------------------- */
+
+.tbBox,
+.tbRule {
+  fill: none;
+  stroke: var(--border-strong);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.tbTitle {
+  font-family: var(--font-data);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  fill: var(--ink);
+}
+
+.tbData {
+  font-family: var(--font-data);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  fill: var(--graphite);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .edge {
+    stroke-dashoffset: 0;
+  }
+
+  .node,
+  .arrow,
+  .junction {
+    opacity: 1;
+  }
+}

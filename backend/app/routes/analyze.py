@@ -35,8 +35,8 @@ def analyze(payload: ProjectInput, db: Session = Depends(get_db)):
     try:
         ml_service = get_ml_service()
         prediction = ml_service.predict(features)
-   except Exception as e:
-    print("ML ERROR:", repr(e))
+    except Exception as e:
+        print("ML ERROR:", repr(e))
     raise HTTPException(
         status_code=503,
         detail="Architecture prediction unavailable."

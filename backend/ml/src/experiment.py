@@ -12,9 +12,9 @@ from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_sc
 sys.path.insert(0, str(Path(__file__).parent))
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "backend"))
 
-from baseline import predict_baseline  # noqa: E402
-from llm_only import predict_llm_only  # noqa: E402
-from preprocess import ORDINAL_MAP  # noqa: E402
+from backend.ml.src.baseline import predict_baseline  # noqa: E402
+from backend.ml.src.llm_only import predict_llm_only  # noqa: E402
+from backend.ml.src.preprocess import ORDINAL_MAP  # noqa: E402
 
 from app.services.feature_service import extract_features  # noqa: E402
 from app.services.llm_service import get_provider  # noqa: E402
@@ -49,7 +49,8 @@ def ml_predict_from_row(row, model, encoders, feature_columns):
         "availability": float(ORDINAL_MAP[row["availability"]]),
     }
     known = set(encoders.domain_classes_)
-    domain = row["domain"] if row["domain"] in known else encoders.domain_classes_[0]
+    domain = row["domain"] if row["domain"] in known else encoders.domain_classes_[
+        0]
     vec["domain"] = float(encoders.domain_encoder.transform([domain])[0])
     X = pd.DataFrame([vec])[feature_columns]
     pred = model.predict(X)[0]
@@ -81,7 +82,8 @@ def llm_plus_ml_predict(row, model, encoders, feature_columns, provider):
         "availability": float(ORDINAL_MAP[features.availability]),
     }
     known = set(encoders.domain_classes_)
-    domain = features.domain if features.domain in known else encoders.domain_classes_[0]
+    domain = features.domain if features.domain in known else encoders.domain_classes_[
+        0]
     vec["domain"] = float(encoders.domain_encoder.transform([domain])[0])
     X = pd.DataFrame([vec])[feature_columns]
     pred = model.predict(X)[0]
@@ -112,15 +114,18 @@ def main():
     for _, row in df.iterrows():
         preds["threshold"].append(predict_baseline(row))
         preds["llm_only"].append(predict_llm_only(build_description(row)))
-        preds["ml"].append(ml_predict_from_row(row, model, encoders, feature_columns))
-        preds["llm_plus_ml"].append(llm_plus_ml_predict(row, model, encoders, feature_columns, provider))
+        preds["ml"].append(ml_predict_from_row(
+            row, model, encoders, feature_columns))
+        preds["llm_plus_ml"].append(llm_plus_ml_predict(
+            row, model, encoders, feature_columns, provider))
 
     results = {name: metrics(y_true, p, labels) for name, p in preds.items()}
 
     print(f"Held-out set: {len(df)} real case studies\n")
     print(f"{'Metric':<12}{'Threshold':>12}{'LLM-only':>12}{'ML':>12}{'LLM+ML':>12}")
     for metric_name in ("accuracy", "precision", "recall", "f1"):
-        row_vals = [results[k][metric_name] for k in ("threshold", "llm_only", "ml", "llm_plus_ml")]
+        row_vals = [results[k][metric_name]
+                    for k in ("threshold", "llm_only", "ml", "llm_plus_ml")]
         print(f"{metric_name:<12}" + "".join(f"{v:>12.3f}" for v in row_vals))
 
     out_path = DATA_DIR.parent / "experiment_results.json"

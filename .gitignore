@@ -12,5 +12,10 @@ frontend/dist/
 arch_gen.db
 reports/*.pdf
 
+# AI tool configs (Claude, OpenCode, etc.)
+.claude/
+.opencode/
+opencode.json
+
 # Trained model artifacts ARE committed (ml/models/*.joblib) — the deployed
 # backend loads them directly rather than retraining on every deploy.

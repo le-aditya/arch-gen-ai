@@ -7,7 +7,7 @@ import pandas as pd
 
 from app.schemas.schemas import ClassProbability, FeatureVector, Prediction, TopFactor
 
-ML_ROOT = Path(__file__).parent.parent.parent.parent / "ml"
+ML_ROOT = Path(__file__).parent.parent.parent / "ml"
 MODELS_DIR = ML_ROOT / "models"
 
 # The serialized Encoders instance was pickled from ml/src/preprocess.py -- joblib
@@ -37,7 +37,8 @@ class MLService:
     def __init__(self):
         self.model = joblib.load(MODELS_DIR / "architecture_classifier.joblib")
         self.encoders = joblib.load(MODELS_DIR / "encoders.joblib")
-        self.feature_columns = joblib.load(MODELS_DIR / "feature_columns.joblib")
+        self.feature_columns = joblib.load(
+            MODELS_DIR / "feature_columns.joblib")
 
     def _vectorize(self, features: FeatureVector) -> pd.DataFrame:
         row = {
@@ -53,14 +54,17 @@ class MLService:
             "availability": float(ORDINAL_MAP[features.availability]),
         }
         known_domains = set(self.encoders.domain_classes_)
-        domain = features.domain if features.domain in known_domains else self.encoders.domain_classes_[0]
-        row["domain"] = float(self.encoders.domain_encoder.transform([domain])[0])
+        domain = features.domain if features.domain in known_domains else self.encoders.domain_classes_[
+            0]
+        row["domain"] = float(
+            self.encoders.domain_encoder.transform([domain])[0])
         return pd.DataFrame([row])[self.feature_columns]
 
     def predict(self, features: FeatureVector) -> Prediction:
         X = self._vectorize(features)
         proba = self.model.predict_proba(X)[0]
-        classes = self.encoders.label_encoder.inverse_transform(range(len(proba)))
+        classes = self.encoders.label_encoder.inverse_transform(
+            range(len(proba)))
         best_idx = proba.argmax()
         architecture = classes[best_idx]
         confidence = float(proba[best_idx])
@@ -73,7 +77,8 @@ class MLService:
             )[:5]
             total = sum(v for _, v in ranked) or 1.0
             top_factors = [
-                TopFactor(name=FEATURE_LABELS.get(name, name), importance=float(v / total))
+                TopFactor(name=FEATURE_LABELS.get(name, name),
+                          importance=float(v / total))
                 for name, v in ranked
             ]
 

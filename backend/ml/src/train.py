@@ -6,13 +6,14 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import f1_score
 from sklearn.tree import DecisionTreeClassifier
 
-from preprocess import build_dataset, FEATURE_COLUMNS
+from backend.ml.src.preprocess import build_dataset, FEATURE_COLUMNS
 
 MODELS_DIR = Path(__file__).parent.parent / "models"
 
 
 def train_models(X_train, y_train):
-    tree = DecisionTreeClassifier(max_depth=6, min_samples_leaf=5, random_state=42)
+    tree = DecisionTreeClassifier(
+        max_depth=6, min_samples_leaf=5, random_state=42)
     tree.fit(X_train, y_train)
 
     forest = RandomForestClassifier(

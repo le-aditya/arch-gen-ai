@@ -11,7 +11,7 @@ from sklearn.metrics import (
     classification_report,
 )
 
-from preprocess import build_dataset
+from backend.ml.src.preprocess import build_dataset
 
 MODELS_DIR = Path(__file__).parent.parent / "models"
 
@@ -39,7 +39,8 @@ def main():
     print("Confusion matrix:")
     print(cm)
     print()
-    print(classification_report(y_test, preds, target_names=labels, zero_division=0))
+    print(classification_report(y_test, preds,
+          target_names=labels, zero_division=0))
 
     return {
         "model": selected_name,

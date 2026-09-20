@@ -33,14 +33,26 @@ def analyze(payload: ProjectInput, db: Session = Depends(get_db)):
     features = extract_features(payload, requirements)
 
     try:
+        print("STEP 1: Loading ML service")
         ml_service = get_ml_service()
+        print("STEP 2: ML service loaded")
+
+        print("STEP 3: Running prediction")
         prediction = ml_service.predict(features)
+        print("STEP 4: Prediction completed")
+
     except Exception as e:
-        print("ML ERROR:", repr(e))
-    raise HTTPException(
-        status_code=503,
-        detail="Architecture prediction unavailable."
-    )
+        import traceback
+        print("========== ML ERROR ==========")
+        print(repr(e))
+        traceback.print_exc()
+        print("==============================")
+
+        raise HTTPException(
+            status_code=503,
+            detail=f"ML ERROR: {str(e)}"
+        )
+
     tech_stack = generate_tech_stack(
         requirements, prediction, budget=payload.budget)
     database = generate_database(requirements)
@@ -57,8 +69,10 @@ def analyze(payload: ProjectInput, db: Session = Depends(get_db)):
     db.add(project)
     db.flush()
 
-    db.add(Requirement(project_id=project.project_id,
-           requirement_data=requirements.model_dump_json()))
+    db.add(Requirement(
+        project_id=project.project_id,
+        requirement_data=requirements.model_dump_json(),
+    ))
     db.add(PredictionModel(
         project_id=project.project_id,
         architecture=prediction.architecture,

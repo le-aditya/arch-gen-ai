@@ -15,7 +15,7 @@ from app.services.feature_service import extract_features
 from app.services.llm_service import extract_requirements_safe
 from app.services.ml_service import get_ml_service
 
-router = APIRouter(prefix="/api")
+router = APIRouter()
 
 
 @router.post("/analyze", response_model=AnalyzeResponse)

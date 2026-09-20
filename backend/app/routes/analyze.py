@@ -15,18 +15,20 @@ from app.services.feature_service import extract_features
 from app.services.llm_service import extract_requirements_safe
 from app.services.ml_service import get_ml_service
 
-router = APIRouter()
+router = APIRouter(prefix="/api")
 
 
 @router.post("/analyze", response_model=AnalyzeResponse)
 def analyze(payload: ProjectInput, db: Session = Depends(get_db)):
     if not payload.description.strip():
-        raise HTTPException(status_code=400, detail="Please provide an application description.")
+        raise HTTPException(
+            status_code=400, detail="Please provide an application description.")
 
     try:
         requirements = extract_requirements_safe(payload.description)
     except Exception:
-        raise HTTPException(status_code=502, detail="Unable to extract requirements. Please try again.")
+        raise HTTPException(
+            status_code=502, detail="Unable to extract requirements. Please try again.")
 
     features = extract_features(payload, requirements)
 
@@ -34,9 +36,11 @@ def analyze(payload: ProjectInput, db: Session = Depends(get_db)):
         ml_service = get_ml_service()
         prediction = ml_service.predict(features)
     except Exception:
-        raise HTTPException(status_code=503, detail="Architecture prediction unavailable.")
+        raise HTTPException(
+            status_code=503, detail="Architecture prediction unavailable.")
 
-    tech_stack = generate_tech_stack(requirements, prediction, budget=payload.budget)
+    tech_stack = generate_tech_stack(
+        requirements, prediction, budget=payload.budget)
     database = generate_database(requirements)
     apis = generate_apis(requirements)
     diagrams = generate_diagrams(prediction, database, tech_stack)
@@ -51,7 +55,8 @@ def analyze(payload: ProjectInput, db: Session = Depends(get_db)):
     db.add(project)
     db.flush()
 
-    db.add(Requirement(project_id=project.project_id, requirement_data=requirements.model_dump_json()))
+    db.add(Requirement(project_id=project.project_id,
+           requirement_data=requirements.model_dump_json()))
     db.add(PredictionModel(
         project_id=project.project_id,
         architecture=prediction.architecture,

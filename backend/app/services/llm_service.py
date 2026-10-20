@@ -63,11 +63,6 @@ class LLMProvider(ABC):
     def extract_requirements(self, description: str) -> Requirements:
         raise NotImplementedError
 
-    @abstractmethod
-    def judge_architecture(self, description: str) -> str:
-        """LLM-only architecture judgment, used by the four-way experiment (PRD section 17B)."""
-        raise NotImplementedError
-
 
 def _match_keywords(text: str, keyword_map: dict[str, list[str]]) -> list[str]:
     matches = []
@@ -111,17 +106,6 @@ class MockProvider(LLMProvider):
             data_complexity=data_complexity,
         )
 
-    def judge_architecture(self, description: str) -> str:
-        text = description.lower()
-        scale_words = ["million", "nationwide", "national", "global", "large scale", "enterprise"]
-        small_words = ["mvp", "prototype", "hackathon", "small team", "solo", "weekend"]
-
-        if any(w in text for w in scale_words):
-            return "Microservices"
-        if any(w in text for w in small_words):
-            return "Serverless"
-        return "Monolith"
-
 
 class GeminiProvider(LLMProvider):
     """Calls Google Gemini for structured requirement extraction.
@@ -162,20 +146,6 @@ Description: {description}"""
             return Requirements(**data)
         except (json.JSONDecodeError, ValidationError) as exc:
             raise LLMExtractionError(f"Gemini returned invalid JSON: {exc}") from exc
-
-    def judge_architecture(self, description: str) -> str:
-        prompt = (
-            "Which software architecture style best fits this application: "
-            "Monolith, Microservices, or Serverless? "
-            f"Description: {description}\n"
-            "Respond with exactly one word: Monolith, Microservices, or Serverless."
-        )
-        response = self._model.generate_content(prompt)
-        text = response.text.strip()
-        for label in ("Microservices", "Serverless", "Monolith"):
-            if label.lower() in text.lower():
-                return label
-        return "Monolith"
 
 
 class LLMExtractionError(Exception):

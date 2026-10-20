@@ -77,7 +77,7 @@ def analyze(payload: ProjectInput, db: Session = Depends(get_db)):
         project_id=project.project_id,
         architecture=prediction.architecture,
         confidence=prediction.confidence,
-        model_version="random_forest_v1",
+        model_version="random_forest_v2",
     ))
 
     report_id = f"rpt_{uuid.uuid4().hex[:10]}"

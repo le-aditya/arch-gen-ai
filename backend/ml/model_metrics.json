@@ -1,0 +1,46 @@
+{
+  "model": "random_forest_v2",
+  "trained_on": "synthetic_dataset.csv",
+  "holdout": {
+    "accuracy": 0.8875,
+    "precision": 0.8916600561205764,
+    "recall": 0.8875000000000001,
+    "f1": 0.8880633487426545,
+    "n_train": 960,
+    "n_test": 240,
+    "labels": [
+      "Microservices",
+      "Monolith",
+      "Serverless"
+    ],
+    "confusion_matrix": [
+      [
+        70,
+        5,
+        5
+      ],
+      [
+        2,
+        74,
+        4
+      ],
+      [
+        1,
+        10,
+        69
+      ]
+    ]
+  },
+  "real_case_studies": {
+    "accuracy": 0.8285714285714286,
+    "precision": 0.8675213675213675,
+    "recall": 0.7845117845117845,
+    "f1": 0.7859362859362861,
+    "n": 35,
+    "per_class_recall": {
+      "Microservices": 1.0,
+      "Monolith": 0.4444444444444444,
+      "Serverless": 0.9090909090909091
+    }
+  }
+}

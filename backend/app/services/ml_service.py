@@ -33,6 +33,18 @@ FEATURE_LABELS = {
 }
 
 
+def _feature_importances(model):
+    """Feature importances whether the estimator is bare or inside a pipeline."""
+    importances = getattr(model, "feature_importances_", None)
+    if importances is not None:
+        return importances
+    for step in getattr(model, "named_steps", {}).values():
+        importances = getattr(step, "feature_importances_", None)
+        if importances is not None:
+            return importances
+    return None
+
+
 class MLService:
     def __init__(self):
         self.model = joblib.load(MODELS_DIR / "architecture_classifier.joblib")
@@ -69,13 +81,15 @@ class MLService:
         architecture = classes[best_idx]
         confidence = float(proba[best_idx])
 
-        importances = getattr(self.model, "feature_importances_", None)
+        importances = _feature_importances(self.model)
         top_factors = []
         if importances is not None:
+            # Share of the model's TOTAL importance, so each weight is meaningful
+            # on its own and the reported factors never add up to 100%.
+            total = float(sum(importances)) or 1.0
             ranked = sorted(
                 zip(self.feature_columns, importances), key=lambda x: x[1], reverse=True
             )[:5]
-            total = sum(v for _, v in ranked) or 1.0
             top_factors = [
                 TopFactor(name=FEATURE_LABELS.get(name, name),
                           importance=float(v / total))

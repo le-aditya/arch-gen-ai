@@ -33,14 +33,7 @@ def analyze(payload: ProjectInput, db: Session = Depends(get_db)):
     features = extract_features(payload, requirements)
 
     try:
-        print("STEP 1: Loading ML service")
-        ml_service = get_ml_service()
-        print("STEP 2: ML service loaded")
-
-        print("STEP 3: Running prediction")
-        prediction = ml_service.predict(features)
-        print("STEP 4: Prediction completed")
-
+        prediction = get_ml_service().predict(features)
     except Exception as e:
         import traceback
         print("========== ML ERROR ==========")
@@ -57,7 +50,7 @@ def analyze(payload: ProjectInput, db: Session = Depends(get_db)):
         requirements, prediction, budget=payload.budget)
     database = generate_database(requirements)
     apis = generate_apis(requirements)
-    diagrams = generate_diagrams(prediction, database, tech_stack)
+    diagrams = generate_diagrams(prediction, database, tech_stack, requirements)
 
     project = Project(
         description=payload.description,
